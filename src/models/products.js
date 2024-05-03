@@ -9,7 +9,10 @@ const productsSchema = new Schema({
   birligi: {
     type: String,
     enum:[
-      'шт'
+      'шт',
+      'пара',
+      'комплект',
+      'метр'
     ],
     required: true,
   },

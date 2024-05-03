@@ -9,7 +9,7 @@ const getSotilganController = async (req, res) => {
         console.log(error.message);
         res.status(500).json({ message: "Server error" });
     }
-}
+} 
 
 module.exports = {
     getSotilganController
