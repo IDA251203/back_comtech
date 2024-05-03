@@ -3,7 +3,7 @@ const AdminBroExpress = require("admin-bro-expressjs");
 const AdminBroMongoose = require("admin-bro-mongoose");
 const mongoose = require("mongoose");
 const Sotilgan = require("../models/sotilgan");
-const products = require("../models/products");
+const Products = require("../models/products");
 
 AdminBro.registerAdapter(AdminBroMongoose);
 
@@ -15,7 +15,7 @@ const adminBro = new AdminBro({
     rootPath: "/admin",
     resources: [
         {
-            resource: products,
+            resource: Products,
             options: {
                 parent: {
                     name: "All",
@@ -43,18 +43,24 @@ const adminBro = new AdminBro({
     ]
 });
 
-// Admin panel uchun sozlamalar
-const ADMIN = {
-    email: process.env.ADMIN_EMAIL || "dinaraazamatovna03@gmail.com",
-    password: process.env.ADMIN_PASSWORD || "izzatbek",
-};
+const ADMIN = [
+    {
+        email: process.env.ADMIN_EMAIL || "comtech@gmail.com",
+        password: process.env.ADMIN_PASSWORD || "comtechh",
+    },
+    {
+        email: process.env.ADMIN_EMAIL2 || "dinaraazamatovna03@gmail.com",
+        password: process.env.ADMIN_PASSWORD2 || "comtech",
+    }
+];
 
 const Router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
     cookieName: process.env.ADMIN_COOKIE_NAME || "comtechh",
     cookiePassword: process.env.ADMIN_COOKIE_PASS || "comtechcch",
     authenticate: async (email, password) => {
-        if (email === ADMIN.email && password === ADMIN.password) {
-            return ADMIN;
+        const matchedAdmin = ADMIN.find(admin => admin.email === email && admin.password === password);
+        if (matchedAdmin) {
+            return matchedAdmin;
         }
         return null;
     },
