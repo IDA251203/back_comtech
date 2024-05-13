@@ -16,10 +16,10 @@ const sotildiSchema = new Schema({
     ],
     required: true,
   },
-  narxi: {
-    type: Number,
-    required: false,
-  },
+  // narxi: {
+  //   type: Number,
+  //   required: false,
+  // },
   mavjudtovarlar: {
     type: Number,
     required: true,
